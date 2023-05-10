@@ -1,0 +1,104 @@
+import rodados.*
+import dependencia.*
+
+describe "test rodados" {
+	const corsa1=  new Corsa(color="rojo")
+	const kwid1 = new Kwid (tieneTanque= true)
+	const especial1 = new AutosEspeciales( capacidad = 3, peso = 1000,
+		color = "champagne", velocidadMax = 150)
+	
+	method initialize(){
+		trafic.tipoDeMotor(motorPulenta)
+		trafic.tipoDeInterior(interiorPopular)			
+	}
+	//corsa//
+	test "color de un corsa"{
+		assert.equals("rojo", corsa1.color())
+	}
+	test "velocidad maxima de un corsa"{
+		assert.equals(150, corsa1.velocidadMax())
+	}
+	test "capacidad de un corsa"{
+		assert.equals(4, corsa1.capacidad())
+	}
+	test "peso de un corsa"{
+		assert.equals(1300, corsa1.peso())
+	}
+	//kwid//
+	test "capacidad de un Kwid"{
+		assert.equals(3, kwid1.capacidad())
+		assert.equals(120, kwid1.velocidadMax())	
+	}
+	test "color de un kwid"{   
+		assert.equals("azul", kwid1.color())   
+	}
+	test "capacidad de un kwid con tanque extra"{
+		assert.equals(3, kwid1.capacidad())
+	}
+	test "capacidad de un kwid sin tanque extra"{
+		kwid1.tieneTanque(false)
+		assert.equals(4, kwid1.capacidad())
+	}
+	test "velocidad maxima de un kwid con tanque extra"{
+		assert.equals(120, kwid1.velocidadMax())
+	}
+	test "velocidad maxima de un kwid sin tanque extra"{
+		kwid1.tieneTanque(false)
+		assert.equals(110, kwid1.velocidadMax())
+	}
+	test "peso de un kwid con tanque extra"{
+		assert.equals(1350, kwid1.peso())
+	}
+	test "peso de un kwid sin tanque extra"{
+		kwid1.tieneTanque(false)
+		assert.equals(1200, kwid1.peso())
+	}
+	//trafic//
+	test "capacidad de trafic con interior popular "{
+		assert.equals(12, trafic.capacidad())
+	}
+	test "capacidad de trafic con interior comodo "{
+		trafic.tipoDeInterior(interiorComodo)	
+		assert.equals(5, trafic.capacidad())
+	}
+	test "color de trafic "{
+		assert.equals("blanco", trafic.color())
+	}
+	test "velocidad de trafic con motor pulenta "{
+		assert.equals(130, trafic.velocidadMax())
+	}
+	test "velocidad de trafic con motor bataton "{
+		trafic.tipoDeMotor(motorBataton)	
+		assert.equals(80, trafic.velocidadMax())
+	}
+	test "peso de trafic con motor pulenta e interior popular "{
+		assert.equals(5800, trafic.peso())
+	}
+	test "peso de trafic con motor bataton e interior comodo "{
+		trafic.tipoDeMotor(motorBataton)
+		trafic.tipoDeInterior(interiorComodo)		
+		assert.equals(5200, trafic.peso())
+	}
+	test "peso de trafic con motor pulenta e interior comodo "{
+		trafic.tipoDeInterior(interiorComodo)	
+		assert.equals(5500, trafic.peso())
+	}
+	test "peso de trafic con motor bataton e interior popular "{
+		trafic.tipoDeMotor(motorBataton)
+		assert.equals(5500, trafic.peso())
+	}
+	//autos especiales//
+	test "capacidad del auto especial 1"{
+		assert.equals(3, especial1.capacidad())
+	}
+	test "peso del auto especial 1"{
+		assert.equals(1000, especial1.peso())
+	}
+	test "color del auto especial 1"{
+		assert.equals("champagne", especial1.color())
+	}
+	test "velocidad maxima del auto especial 1"{
+		assert.equals(150, especial1.velocidadMax())
+	}
+}
+

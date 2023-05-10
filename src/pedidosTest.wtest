@@ -1,0 +1,43 @@
+import pedidoTranslado.*
+import dependencia.*
+import rodados.*
+
+
+describe "test de pedidos de trasnlados"{
+	var cachito = new Corsa (color = "rojo")
+	const pedido1 = new Pedido(distancia = 960, tiempoMax = 8, cantPasajeros = 4) 
+	
+	method inicialize(){
+		pedido1.ingresarColor("azul")
+		pedido1.ingresarColor("negro")
+	}
+
+	test "velocidad requerida"{
+		assert.equals(120, pedido1.velocidadRequerida())
+	}
+	test "cachito es satisfactorio para el pedido1"{
+		assert.equals(true, pedido1.esSatisfactorio(cachito))
+	}
+	test "cachito no es satisfactorio si se agrega el rojo a incompatibles"{
+		pedido1.ingresarColor("rojo")
+		assert.equals(false, pedido1.esSatisfactorio(cachito))
+	}
+	test "cachito no es satisfactorio si los pasajeros son 6"{
+		pedido1.cantPasajeros(6)
+		assert.equals(false, pedido1.esSatisfactorio(cachito))
+	}
+	test "acelerar el pedido"{
+		pedido1.acelerar()
+		assert.equals(7, pedido1.tiempoMax())
+	}
+	test "relajar el pedido"{
+		pedido1.relajar()
+		assert.equals(9, pedido1.tiempoMax())
+	}
+}
+
+
+
+
+
+
