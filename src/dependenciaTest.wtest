@@ -70,8 +70,13 @@ describe "test dependencia "{
 		assert.equals(false, cultura.esGrande())
 	}
 	
+///////etapa3////	
+	test "method totalPasajerosConPedidos"{
+		
+	}
 	
 	
+		return pedidos.sum({pedidos =>pedidos.cantPasajeros()})"
 	
 	
 	

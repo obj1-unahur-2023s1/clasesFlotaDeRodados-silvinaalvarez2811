@@ -1,0 +1,88 @@
+import dependencia.*
+import pedidoTranslado.*
+import rodados.*
+				//etapa 3//
+
+describe "test pedido por  cada dependencia "{
+	//dependencias//
+	const deportes = new Dependencia(cantEmpleados = 45)
+	const cultura = new Dependencia(cantEmpleados = 31)
+	//pedidos//
+	const pedido1 = new Pedido(distancia = 960, tiempoMax = 8, cantPasajeros = 4) 
+	const pedido2 = new Pedido(distancia = 800, tiempoMax = 8, cantPasajeros = 3)
+	const pedido3 = new Pedido(distancia = 200, tiempoMax = 3, cantPasajeros = 2) 
+	const pedido4 = new Pedido(distancia = 600, tiempoMax = 8, cantPasajeros = 5) 
+	//autos de flota//
+	const cachito = new Corsa (color = "rojo")
+	const corsaAzul = new Corsa(color = "azul")
+	const corsaVerde = new Corsa(color = "verde")
+	const kwid1 = new Kwid (tieneTanque = true)
+	const especial1 = new AutosEspeciales( 
+		capacidad = 5, peso = 1200,color = "beige", velocidadMax = 160)
+	const kwid2 = new Kwid (tieneTanque = true)
+	const kwid3 = new Kwid (tieneTanque = true)
+	const kwid4 = new Kwid (tieneTanque = false)
+	
+	
+
+	method initialize(){
+		//flota de deportes
+		deportes.agregarAFlota(cachito)
+		deportes.agregarAFlota(corsaAzul)
+		deportes.agregarAFlota(corsaVerde)
+		deportes.agregarAFlota(kwid1)
+		deportes.agregarAFlota(especial1)
+		//flota de cultura
+		cultura.agregarAFlota(cachito)
+		cultura.agregarAFlota(kwid2)
+		cultura.agregarAFlota(kwid3)
+		cultura.agregarAFlota(kwid4)
+		cultura.agregarAFlota(trafic)
+		trafic.tipoDeMotor(motorBataton)
+		trafic.tipoDeInterior(interiorPopular)
+		///colores incompatibles//
+		pedido1.ingresarColor("rojo")
+		pedido2.ingresarColor("azul")
+		pedido3.ingresarColor("verde")
+		pedido4.ingresarColor("rojo")
+		pedido1.ingresarColor("negro")
+		pedido2.ingresarColor("rojo")
+		
+	}
+	
+	test "totalPasajerosConPedidos para deportes"{
+		deportes.agregarPedido(pedido1)
+		deportes.agregarPedido(pedido2)
+		assert.equals(7, deportes.totalPasajerosConPedidos())
+	}
+	test "totalPasajerosConPedidos para cultura"{
+		cultura.agregarPedido(pedido2)
+		cultura.agregarPedido(pedido3)
+		cultura.agregarPedido(pedido4)
+		assert.equals(10, cultura.totalPasajerosConPedidos())
+	}
+	test "todos los pedidos que tiene deportes tienen el color dado como incompatible"{
+		deportes.agregarPedido(pedido1)
+		deportes.agregarPedido(pedido2)
+		assert.equals(true, deportes.colorIncompatible("rojo"))
+	}
+	test "todos los pedidos que tiene cultura tienen el color verde como incompatible"{
+		cultura.agregarPedido(pedido1)
+		cultura.agregarPedido(pedido2)
+		assert.equals(false, cultura.colorIncompatible("verde"))
+	}
+	test "relajar todos los pedidos"{
+		assert.equals(8, pedido1.tiempoMax())
+		assert.equals(8, pedido2.tiempoMax())
+		cultura.agregarPedido(pedido1)
+		cultura.agregarPedido(pedido2)
+		cultura.relajarTodosLosPedidos()
+		assert.equals(9, pedido1.tiempoMax())
+		assert.equals(9, pedido2.tiempoMax())
+	}
+	test "pedidos que tiene registrados no puede ser satisfecho por ninguno de los autos"{
+		cultura.agregarPedido(pedido3)
+		cultura.agregarPedido(pedido4)
+		assert.equals([pedido4],cultura.pedidosNoSatisfechos())
+	}
+}	

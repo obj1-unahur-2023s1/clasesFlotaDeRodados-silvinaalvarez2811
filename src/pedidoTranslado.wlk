@@ -2,10 +2,10 @@ import dependencia.*
 import rodados.*
 
 class Pedido {
-	var property distancia
-	var property tiempoMax
-	var property cantPasajeros
-	const coloresIncomp = #{}
+	var property distancia =0
+	var property tiempoMax =0
+	var property cantPasajeros =0
+	const coloresIncomp = []
 		
 	method velocidadRequerida(){
 		return distancia / tiempoMax
@@ -19,6 +19,7 @@ class Pedido {
 	method ingresarColor(colorIncompatible){
 		coloresIncomp.add(colorIncompatible)
 	}
+	method coloresIncompatibles(){return coloresIncomp}
 	method acelerar(){ tiempoMax -= 1}
 	method relajar(){tiempoMax +=1}
 }

@@ -4,7 +4,7 @@ import rodados.*
 
 
 describe "test de pedidos de trasnlados"{
-	var cachito = new Corsa (color = "rojo")
+	const cachito = new Corsa (color = "rojo")
 	const pedido1 = new Pedido(distancia = 960, tiempoMax = 8, cantPasajeros = 4) 
 	
 	method inicialize(){
