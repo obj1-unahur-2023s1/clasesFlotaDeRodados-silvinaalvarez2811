@@ -6,7 +6,7 @@ describe "test dependencia "{
 	const deportes = new Dependencia(cantEmpleados = 45)
 	const cultura = new Dependencia(cantEmpleados = 31)
 	
-	var cachito = new Corsa (color = "rojo")
+	const cachito = new Corsa (color = "rojo")
 	const corsaAzul = new Corsa(color = "azul")
 	const corsaVerde = new Corsa(color = "verde")
 	const kwid1 = new Kwid (tieneTanque = true)
@@ -16,19 +16,13 @@ describe "test dependencia "{
 	const kwid3 = new Kwid (tieneTanque = true)
 	const kwid4 = new Kwid (tieneTanque = false)
 	
+	const listaDeporte = [cachito, corsaAzul, corsaVerde,kwid1,especial1]
+	const listaCultura=[cachito,kwid2,kwid3,kwid4,trafic]
+	
 	method initialize(){
-		//flota de deportes
-		deportes.agregarAFlota(cachito)
-		deportes.agregarAFlota(corsaAzul)
-		deportes.agregarAFlota(corsaVerde)
-		deportes.agregarAFlota(kwid1)
-		deportes.agregarAFlota(especial1)
-		//flota de cultura
-		cultura.agregarAFlota(cachito)
-		cultura.agregarAFlota(kwid2)
-		cultura.agregarAFlota(kwid3)
-		cultura.agregarAFlota(kwid4)
-		cultura.agregarAFlota(trafic)
+		
+		listaDeporte.forEach({ auto => deportes.agregarAFlota(auto) })
+		listaCultura.forEach({ auto => cultura.agregarAFlota(auto) })
 		trafic.tipoDeMotor(motorBataton)
 		trafic.tipoDeInterior(interiorPopular)
 	}
@@ -69,18 +63,6 @@ describe "test dependencia "{
 	test "cultura es grande "{
 		assert.equals(false, cultura.esGrande())
 	}
-	
 ///////etapa3////	
-	test "method totalPasajerosConPedidos"{
-		
-	}
-	
-	
-		return pedidos.sum({pedidos =>pedidos.cantPasajeros()})"
-	
-	
-	
-	
-	
 	
 }
